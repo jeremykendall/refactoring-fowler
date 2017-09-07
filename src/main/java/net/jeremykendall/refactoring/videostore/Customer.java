@@ -1,88 +1,73 @@
 package net.jeremykendall.refactoring.videostore;
 
-import java.util.Enumeration;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 class Customer {
     private String name;
-    private Vector<Rental> rentals = new Vector<>();
+    private List<Rental> rentals = new ArrayList<>();
 
     Customer(String name) {
         this.name = name;
     }
 
     String statement() {
-        Enumeration<Rental> rentals = this.rentals.elements();
-        StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
-        while (rentals.hasMoreElements()) {
-            Rental each = rentals.nextElement();
+        StringBuilder statement = new StringBuilder("Rental Record for " + getName() + "\n");
+        for (Rental rental: this.rentals) {
 
             //show figures for this rental
-            result.append("\t")
-                    .append(each.getMovie().getTitle())
+            statement.append("\t")
+                    .append(rental.getMovie().getTitle())
                     .append("\t")
-                    .append(String.valueOf(each.getCharge()))
+                    .append(String.valueOf(rental.getCharge()))
                     .append("\n");
         }
         //add footer lines
-        result.append("Amount owed is ")
+        statement.append("Amount owed is ")
                 .append(String.valueOf(getTotalCharge()))
                 .append("\n")
                 .append("You earned ")
                 .append(String.valueOf(getTotalFrequentRenterPoints()))
                 .append(" frequent renter points");
 
-        return result.toString();
+        return statement.toString();
     }
 
     String htmlStatement() {
-        Enumeration<Rental> rentals = this.rentals.elements();
-        StringBuilder result = new StringBuilder("<h1>Rental Record for <em>" + getName() + "</em></h1><p>\n");
-        while (rentals.hasMoreElements()) {
-            Rental each = rentals.nextElement();
-
+        StringBuilder statement = new StringBuilder("<h1>Rental Record for <em>" + getName() + "</em></h1><p>\n");
+        for (Rental rental: this.rentals) {
             //show figures for this rental
-            result.append(each.getMovie().getTitle())
+            statement.append(rental.getMovie().getTitle())
                     .append(": ")
-                    .append(String.valueOf(each.getCharge()))
+                    .append(String.valueOf(rental.getCharge()))
                     .append("<br>\n");
         }
         //add footer lines
-        result.append("</p><p>You owe <em>")
+        statement.append("</p><p>You owe <em>")
                 .append(String.valueOf(getTotalCharge()))
                 .append("</em></p>\n")
                 .append("<p>On this rental you earned <em>")
                 .append(String.valueOf(getTotalFrequentRenterPoints()))
                 .append("</em> frequent renter points</p>");
         
-        return result.toString();
+        return statement.toString();
     }
 
-    void addRental(Rental arg) {
-        rentals.addElement(arg);
+    void addRental(Rental rental) {
+        rentals.add(rental);
     }
 
     private double getTotalCharge() {
-        double result = 0;
-        Enumeration<Rental> rentals = this.rentals.elements();
-        while (rentals.hasMoreElements()) {
-            Rental each = rentals.nextElement();
-            result += each.getCharge();
-        }
-
-        return result;
+        return this.rentals.stream()
+                .mapToDouble(Rental::getCharge)
+                .sum();
     }
 
     private int getTotalFrequentRenterPoints()
     {
-        int result = 0;
-        Enumeration<Rental> rentals = this.rentals.elements();
-        while (rentals.hasMoreElements()) {
-            Rental each = rentals.nextElement();
-            result += each.getFrequentRenterPoints();
-        }
-
-        return result;
+        return this.rentals.stream()
+                .mapToInt(Rental::getFrequentRenterPoints)
+                .sum();
     }
 
     private String getName() {
