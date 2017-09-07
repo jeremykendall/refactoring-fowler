@@ -5,10 +5,10 @@ import net.jeremykendall.refactoring.videostore.state.NewReleasePrice;
 import net.jeremykendall.refactoring.videostore.state.Price;
 import net.jeremykendall.refactoring.videostore.state.RegularPrice;
 
-public class Movie {
-    public static final int CHILDRENS = 2;
-    public static final int REGULAR = 0;
-    public static final int NEW_RELEASE = 1;
+class Movie {
+    static final int CHILDRENS = 2;
+    static final int REGULAR = 0;
+    static final int NEW_RELEASE = 1;
 
     private String title;
     private Price price;
