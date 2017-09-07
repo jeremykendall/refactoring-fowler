@@ -9,8 +9,8 @@ class Rental {
         this.daysRented = daysRented;
     }
 
-    Movie getMovie() {
-        return movie;
+    String getMovieTitle() {
+        return movie.getTitle();
     }
 
     double getCharge() {

@@ -17,7 +17,7 @@ class Customer {
 
             //show figures for this rental
             statement.append("\t")
-                    .append(rental.getMovie().getTitle())
+                    .append(rental.getMovieTitle())
                     .append("\t")
                     .append(String.valueOf(rental.getCharge()))
                     .append("\n");
@@ -37,7 +37,7 @@ class Customer {
         StringBuilder statement = new StringBuilder("<h1>Rental Record for <em>" + getName() + "</em></h1><p>\n");
         for (Rental rental: this.rentals) {
             //show figures for this rental
-            statement.append(rental.getMovie().getTitle())
+            statement.append(rental.getMovieTitle())
                     .append(": ")
                     .append(String.valueOf(rental.getCharge()))
                     .append("<br>\n");
