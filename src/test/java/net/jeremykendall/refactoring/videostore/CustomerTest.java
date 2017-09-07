@@ -16,7 +16,7 @@ public class CustomerTest {
 
     @Test
     public void statementRentRegularMovieForOneDay() throws Exception {
-        customer.addRental(getRental("Killer Klowns from Outer Space", Movie.REGULAR, 1));
+        customer.addRental(getRental("Killer Klowns from Outer Space", PriceCode.REGULAR, 1));
 
         String expected = "Rental Record for Arthur Dent\n" +
                 "\tKiller Klowns from Outer Space\t2.0\n" +
@@ -27,7 +27,7 @@ public class CustomerTest {
 
     @Test
     public void statementRentNewReleaseMovieForOneDay() throws Exception {
-        customer.addRental(getRental("Awesome New Release", Movie.NEW_RELEASE, 1));
+        customer.addRental(getRental("Awesome New Release", PriceCode.NEW_RELEASE, 1));
 
         String expected = "Rental Record for Arthur Dent\n" +
                 "\tAwesome New Release\t3.0\n" +
@@ -38,7 +38,7 @@ public class CustomerTest {
 
     @Test
     public void statementRentChildrensMovieForOneDay() throws Exception {
-        customer.addRental(getRental("Cars", Movie.CHILDRENS, 1));
+        customer.addRental(getRental("Cars", PriceCode.CHILDRENS, 1));
 
         String expected = "Rental Record for Arthur Dent\n" +
                 "\tCars\t1.5\n" +
@@ -49,7 +49,7 @@ public class CustomerTest {
 
     @Test
     public void statementRentChildrensMovieForFourDays() throws Exception {
-        customer.addRental(getRental("Cars", Movie.CHILDRENS, 4));
+        customer.addRental(getRental("Cars", PriceCode.CHILDRENS, 4));
 
         String expected = "Rental Record for Arthur Dent\n" +
                 "\tCars\t3.0\n" +
@@ -60,7 +60,7 @@ public class CustomerTest {
 
     @Test
     public void statementRentRegularMovieForThreeDays() throws Exception {
-        customer.addRental(getRental("Killer Klowns from Outer Space", Movie.REGULAR, 3));
+        customer.addRental(getRental("Killer Klowns from Outer Space", PriceCode.REGULAR, 3));
 
         String expected = "Rental Record for Arthur Dent\n" +
                 "\tKiller Klowns from Outer Space\t3.5\n" +
@@ -71,7 +71,7 @@ public class CustomerTest {
 
     @Test
     public void statementRentNewReleaseMovieForTwoDays() throws Exception {
-        customer.addRental(getRental("Awesome New Release", Movie.NEW_RELEASE, 2));
+        customer.addRental(getRental("Awesome New Release", PriceCode.NEW_RELEASE, 2));
 
         String expected = "Rental Record for Arthur Dent\n" +
                 "\tAwesome New Release\t6.0\n" +
@@ -83,9 +83,9 @@ public class CustomerTest {
     @Test
     public void rentOneOfEachTypeForFourDays() throws Exception {
         int daysRented = 4;
-        customer.addRental(getRental("Killer Klowns from Outer Space", Movie.REGULAR, daysRented));
-        customer.addRental(getRental("Awesome New Release", Movie.NEW_RELEASE, daysRented));
-        customer.addRental(getRental("Cars", Movie.CHILDRENS, daysRented));
+        customer.addRental(getRental("Killer Klowns from Outer Space", PriceCode.REGULAR, daysRented));
+        customer.addRental(getRental("Awesome New Release", PriceCode.NEW_RELEASE, daysRented));
+        customer.addRental(getRental("Cars", PriceCode.CHILDRENS, daysRented));
 
         String expected = "Rental Record for Arthur Dent\n" +
                 "\tKiller Klowns from Outer Space\t5.0\n" +
@@ -99,9 +99,9 @@ public class CustomerTest {
     @Test
     public void htmlStatementForOneOfEachTypeForFourDays() throws Exception {
         int daysRented = 4;
-        customer.addRental(getRental("Killer Klowns from Outer Space", Movie.REGULAR, daysRented));
-        customer.addRental(getRental("Awesome New Release", Movie.NEW_RELEASE, daysRented));
-        customer.addRental(getRental("Cars", Movie.CHILDRENS, daysRented));
+        customer.addRental(getRental("Killer Klowns from Outer Space", PriceCode.REGULAR, daysRented));
+        customer.addRental(getRental("Awesome New Release", PriceCode.NEW_RELEASE, daysRented));
+        customer.addRental(getRental("Cars", PriceCode.CHILDRENS, daysRented));
 
         String expected = "<h1>Rental Record for <em>Arthur Dent</em></h1><p>\n" +
                 "Killer Klowns from Outer Space: 5.0<br>\n" +
@@ -112,8 +112,7 @@ public class CustomerTest {
         assertEquals(expected, customer.htmlStatement());
     }
 
-    private Rental getRental(String title, int priceCode, int daysRented) {
-        Movie movie = new Movie(title, priceCode);
-        return new Rental(movie, daysRented);
+    private Rental getRental(String title, PriceCode priceCode, int daysRented) {
+        return new Rental(new Movie(title, priceCode), daysRented);
     }
 }

@@ -6,14 +6,10 @@ import net.jeremykendall.refactoring.videostore.state.Price;
 import net.jeremykendall.refactoring.videostore.state.RegularPrice;
 
 class Movie {
-    static final int CHILDRENS = 2;
-    static final int REGULAR = 0;
-    static final int NEW_RELEASE = 1;
-
     private String title;
     private Price price;
 
-    Movie(String title, int priceCode) {
+    Movie(String title, PriceCode priceCode) {
         this.title = title;
         setPriceCode(priceCode);
     }
@@ -30,7 +26,7 @@ class Movie {
         return price.getFrequentRenterPoints(daysRented);
     }
 
-    private void setPriceCode(int priceCode) {
+    private void setPriceCode(PriceCode priceCode) {
         switch (priceCode) {
             case REGULAR:
                 price = new RegularPrice();
@@ -41,8 +37,6 @@ class Movie {
             case NEW_RELEASE:
                 price = new NewReleasePrice();
                 break;
-            default:
-                throw new IllegalArgumentException("Incorrect price code.");
         }
     }
 }
