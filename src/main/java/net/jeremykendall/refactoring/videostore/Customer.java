@@ -13,37 +13,49 @@ class Customer {
 
     String statement() {
         Enumeration<Rental> rentals = this.rentals.elements();
-        String result = "Rental Record for " + getName() + "\n";
+        StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
 
             //show figures for this rental
-            result += "\t" + each.getMovie().getTitle()+ "\t" +
-                    String.valueOf(each.getCharge()) + "\n";
+            result.append("\t")
+                    .append(each.getMovie().getTitle())
+                    .append("\t")
+                    .append(String.valueOf(each.getCharge()))
+                    .append("\n");
         }
         //add footer lines
-        result += "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
-        result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) +
-                " frequent renter points";
-        return result;
+        result.append("Amount owed is ")
+                .append(String.valueOf(getTotalCharge()))
+                .append("\n")
+                .append("You earned ")
+                .append(String.valueOf(getTotalFrequentRenterPoints()))
+                .append(" frequent renter points");
+
+        return result.toString();
     }
 
     String htmlStatement() {
         Enumeration<Rental> rentals = this.rentals.elements();
-        String result = "<h1>Rental Record for <em>" + getName() + "</em></h1><p>\n";
+        StringBuilder result = new StringBuilder("<h1>Rental Record for <em>" + getName() + "</em></h1><p>\n");
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
 
             //show figures for this rental
-            result += each.getMovie().getTitle() + ": " +
-                    String.valueOf(each.getCharge()) + "<br>\n";
+            result.append(each.getMovie().getTitle())
+                    .append(": ")
+                    .append(String.valueOf(each.getCharge()))
+                    .append("<br>\n");
         }
         //add footer lines
-        result += "</p><p>You owe <em>" + String.valueOf(getTotalCharge()) + "</em></p>\n";
-        result += "<p>On this rental you earned <em>" + String.valueOf(getTotalFrequentRenterPoints()) +
-                "</em> frequent renter points</p>";
+        result.append("</p><p>You owe <em>")
+                .append(String.valueOf(getTotalCharge()))
+                .append("</em></p>\n")
+                .append("<p>On this rental you earned <em>")
+                .append(String.valueOf(getTotalFrequentRenterPoints()))
+                .append("</em> frequent renter points</p>");
         
-        return result;
+        return result.toString();
     }
 
     void addRental(Rental arg) {
