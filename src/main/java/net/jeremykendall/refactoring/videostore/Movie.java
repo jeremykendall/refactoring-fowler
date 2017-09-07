@@ -18,10 +18,6 @@ public class Movie {
         setPriceCode(priceCode);
     }
 
-    public int getPriceCode() {
-        return price.getPriceCode();
-    }
-
     String getTitle() {
         return title;
     }
