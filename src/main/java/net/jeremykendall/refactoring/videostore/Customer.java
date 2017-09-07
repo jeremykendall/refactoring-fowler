@@ -28,6 +28,10 @@ public class Customer {
         return result;
     }
 
+    public String htmlStatement() {
+        return "";
+    }
+
     private double getTotalCharge() {
         double result = 0;
         Enumeration rentals = _rentals.elements();
