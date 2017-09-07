@@ -4,15 +4,15 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 public class Customer {
-    private String _name;
-    private Vector<Rental> _rentals = new Vector<>();
+    private String name;
+    private Vector<Rental> rentals = new Vector<>();
 
     public Customer(String name) {
-        _name = name;
+        this.name = name;
     }
 
     public String statement() {
-        Enumeration<Rental> rentals = _rentals.elements();
+        Enumeration<Rental> rentals = this.rentals.elements();
         String result = "Rental Record for " + getName() + "\n";
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
@@ -29,7 +29,7 @@ public class Customer {
     }
 
     public String htmlStatement() {
-        Enumeration<Rental> rentals = _rentals.elements();
+        Enumeration<Rental> rentals = this.rentals.elements();
         String result = "<h1>Rental Record for <em>" + getName() + "</em></h1><p>\n";
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
@@ -48,7 +48,7 @@ public class Customer {
 
     private double getTotalCharge() {
         double result = 0;
-        Enumeration<Rental> rentals = _rentals.elements();
+        Enumeration<Rental> rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
             result += each.getCharge();
@@ -60,7 +60,7 @@ public class Customer {
     private int getTotalFrequentRenterPoints()
     {
         int result = 0;
-        Enumeration<Rental> rentals = _rentals.elements();
+        Enumeration<Rental> rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
             result += each.getFrequentRenterPoints();
@@ -70,10 +70,10 @@ public class Customer {
     }
 
     public void addRental(Rental arg) {
-        _rentals.addElement(arg);
+        rentals.addElement(arg);
     }
 
     public String getName() {
-        return _name;
+        return name;
     }
 }

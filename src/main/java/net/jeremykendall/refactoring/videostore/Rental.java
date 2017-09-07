@@ -1,27 +1,27 @@
 package net.jeremykendall.refactoring.videostore;
 
 public class Rental {
-    private Movie _movie;
-    private int _daysRented;
+    private Movie movie;
+    private int daysRented;
 
     public Rental(Movie movie, int daysRented) {
-        _movie = movie;
-        _daysRented = daysRented;
+        this.movie = movie;
+        this.daysRented = daysRented;
     }
 
     public Movie getMovie() {
-        return _movie;
+        return movie;
     }
 
     public int getDaysRented() {
-        return _daysRented;
+        return daysRented;
     }
 
     public double getCharge() {
-        return _movie.getCharge(getDaysRented());
+        return movie.getCharge(getDaysRented());
     }
 
     public int getFrequentRenterPoints() {
-        return _movie.getFrequentRenterPoints(getDaysRented());
+        return movie.getFrequentRenterPoints(getDaysRented());
     }
 }
