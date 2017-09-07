@@ -3,15 +3,15 @@ package net.jeremykendall.refactoring.videostore;
 import java.util.Enumeration;
 import java.util.Vector;
 
-public class Customer {
+class Customer {
     private String name;
     private Vector<Rental> rentals = new Vector<>();
 
-    public Customer(String name) {
+    Customer(String name) {
         this.name = name;
     }
 
-    public String statement() {
+    String statement() {
         Enumeration<Rental> rentals = this.rentals.elements();
         String result = "Rental Record for " + getName() + "\n";
         while (rentals.hasMoreElements()) {
@@ -28,7 +28,7 @@ public class Customer {
         return result;
     }
 
-    public String htmlStatement() {
+    String htmlStatement() {
         Enumeration<Rental> rentals = this.rentals.elements();
         String result = "<h1>Rental Record for <em>" + getName() + "</em></h1><p>\n";
         while (rentals.hasMoreElements()) {
@@ -44,6 +44,10 @@ public class Customer {
                 "</em> frequent renter points</p>";
         
         return result;
+    }
+
+    void addRental(Rental arg) {
+        rentals.addElement(arg);
     }
 
     private double getTotalCharge() {
@@ -69,11 +73,7 @@ public class Customer {
         return result;
     }
 
-    public void addRental(Rental arg) {
-        rentals.addElement(arg);
-    }
-
-    public String getName() {
+    private String getName() {
         return name;
     }
 }
