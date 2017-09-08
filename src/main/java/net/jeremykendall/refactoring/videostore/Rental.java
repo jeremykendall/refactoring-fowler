@@ -1,13 +1,11 @@
 package net.jeremykendall.refactoring.videostore;
 
+import lombok.Builder;
+
+@Builder
 public class Rental {
     private Movie movie;
     private int daysRented;
-
-    public Rental(Movie movie, int daysRented) {
-        this.movie = movie;
-        this.daysRented = daysRented;
-    }
 
     public String getMovieTitle() {
         return movie.getTitle();

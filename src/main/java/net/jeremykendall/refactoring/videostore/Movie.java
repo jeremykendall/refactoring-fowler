@@ -1,5 +1,6 @@
 package net.jeremykendall.refactoring.videostore;
 
+import lombok.Builder;
 import net.jeremykendall.refactoring.videostore.state.ChildrensPrice;
 import net.jeremykendall.refactoring.videostore.state.NewReleasePrice;
 import net.jeremykendall.refactoring.videostore.state.Price;
@@ -9,6 +10,7 @@ public class Movie {
     private String title;
     private Price price;
 
+    @Builder
     public Movie(String title, PriceCode priceCode) {
         this.title = title;
         setPriceCode(priceCode);
