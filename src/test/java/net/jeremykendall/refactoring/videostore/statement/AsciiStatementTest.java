@@ -1,6 +1,5 @@
 package net.jeremykendall.refactoring.videostore.statement;
 
-import net.jeremykendall.refactoring.videostore.Customer;
 import net.jeremykendall.refactoring.videostore.PriceCode;
 import org.junit.Before;
 import org.junit.Test;
