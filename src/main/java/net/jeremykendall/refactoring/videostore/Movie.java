@@ -5,11 +5,11 @@ import net.jeremykendall.refactoring.videostore.state.NewReleasePrice;
 import net.jeremykendall.refactoring.videostore.state.Price;
 import net.jeremykendall.refactoring.videostore.state.RegularPrice;
 
-class Movie {
+public class Movie {
     private String title;
     private Price price;
 
-    Movie(String title, PriceCode priceCode) {
+    public Movie(String title, PriceCode priceCode) {
         this.title = title;
         setPriceCode(priceCode);
     }
